@@ -1,0 +1,133 @@
+USERS:
+
+id
+username
+email
+facebook_email
+phonenumber
+followers
+profile picture : 
+cover photo 
+liked_foods : array food_id sorted by tried
+tried_foods : array food_id sorted by tried
+
+
+facebook account id or email
+
+
+
+verify email
+
+
+
+
+MAINSCREEN:
+
+NEAR:
+send{user_id, token, }
+top{user_id}
+
+top 3 pictures from each restaurant
+rank restaurants based on location
+
+
+/mainfeed?sort=[near,top]?location=[(x,y)]&access_token=[access_token]
+
+
+users.validate(access_token)
+
+if sort == near:
+	foods.find(location)limit 10
+
+elif sort == top:
+	location=[x,y]
+
+if sort==near:
+
+
+
+FOODS:
+{_id : int
+likes : int
+tried : int
+thumbnail_url : string
+fullsize_url : string
+restaurant_id : int}
+
+RESTAURANTS:
+{_id : int
+hours : {mon : string
+		tues : string
+		wed : string
+		thurs : string
+		fri : string
+		sat : string
+		sun : string}
+type : string
+
+
+
+
+
+
+Timeline
+
+
+
+has token?
+
+check if token valid
+if valid then display home screen else display start screen
+
+
+
+start screen -> login, signup
+
+
+
+register with facebook -> check if account already associated, if associated with account, then login as user, else take email, full name and ask for password
+authenticate with facebook request permissions for email, first name and last name.
+
+get back token.
+
+send token to server
+
+request email from facebook graph from server using token
+
+check if email is associated with any user
+
+
+register with email -> enter email, create a password, add a photo -> if successful then ask for fullname and phonenumber
+
+login -> email, password -> get back token and all user info like profile picture, cover photo and full name and shit like that. start screen
+
+
+populate user model with follows
+
+
+
+start loading thumbnails...
+
+login -> login with facebook, login with email and password
+
+
+
+logout button
+
+clears configuration
+
+pops user back to start screen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
