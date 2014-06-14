@@ -22,7 +22,6 @@ import datetime
 
 app = Flask(__name__)
 
-	
 @app.route('/authenticate', methods = ['POST'])
 def authenticate():
 	body = request.form
@@ -50,8 +49,6 @@ def authenticate():
 			last_name = body['last_name']
 		if 'profile_picture' in body:
 			profile_picture = body['profile_picture']
-
-
 
 
 		if users.find_one({"email" : email}):
@@ -108,7 +105,7 @@ def photos():
 
 
 
-@app.route('/api/v1/user/<id>/mainfeed', methods = ['GET']):
+@app.route('/api/v1/user/<id>/mainfeed', methods = ['GET'])
 def mainFeed():
 	authenticate_request()
 
