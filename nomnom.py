@@ -5,6 +5,7 @@ import os, sys
 import uuid
 import redis
 import http
+
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
@@ -21,6 +22,15 @@ restaurants = db['restaurants']
 import datetime
 
 app = Flask(__name__)
+
+def getNextSequence(name):
+	ret = db['counters'].find_and_modify(
+		query={"_id" : name},
+		update={"$inc" : {"seq" : 1}},
+		new=True
+	)
+	return ret['seq']
+
 
 @app.route('/authenticate', methods = ['POST'])
 def authenticate():
@@ -55,9 +65,16 @@ def authenticate():
 			return jsonify({"error" : {"message" : "Username taken."}})
 		else:
 			token = generate_token()
-			user = {"email" : email, "password" : password, "first_name" : first_name, "last_name" : last_name, "token" : token}
+			user = {
+					"_id" : getNextSequence("userid"),
+					"email" : email,
+					"password" : password,
+					"first_name" : first_name,
+					"last_name" : last_name,
+					"token" : token
+					}
 			users.insert(user)
-		return jsonify(user)
+			return jsonify({"data": user})
 
 
 	elif body['method'] == 'facebook':
